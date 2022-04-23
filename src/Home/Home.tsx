@@ -1,8 +1,10 @@
 import { TrySharp } from '@mui/icons-material'
 import { Box, Button, Card, CardActions, CardContent, Container, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { setInterval } from 'timers/promises'
 import './Home.css'
+import Pagination from './Pagination'
 
 
 interface NewsObject {
@@ -18,13 +20,22 @@ const Home:React.FC = ()  => {
   useEffect(() => {
     const fetchPosts = async () =>{
       setLoding(true)
-      const res = await 
+      const res = await axios.get('https://hn.algolia.com/api/v1/search_by_date?query=20')
+      setNews(res.data.hits)
+      setLoding(false)
     }
-  
+    fetchPosts()
   }, [])
 
   console.log(news)
-  
+
+  // get current post
+  const lastPost:any = currentPage * postPerPage
+  const firstPost:any = lastPost - postPerPage
+  const currentPost:any = news.slice(firstPost, lastPost)
+
+  const paginate = (pageNumber: React.SetStateAction<number>) => setCurrentPage(pageNumber);
+
   return (
     <Box className='home_bg'>
       <Typography variant='h3' sx={{textAlign:'center', fontWeight:600, py:5}}>Latest News</Typography>
@@ -41,7 +52,7 @@ const Home:React.FC = ()  => {
                   </TableRow>
                 </TableHead>
 
-               {news?.map((n) =>  <TableBody key={n._id}>
+               {currentPost?.map((n: { _id: React.Key | null | undefined; story_title: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; created_at: string | any[]; author: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; story_url: string | undefined }) =>  <TableBody key={n._id}>
                   <TableRow data-aos="zoom-in-down">
                       <TableCell>{n?.story_title}</TableCell> 
                       <TableCell>{n?.created_at.slice(0,10)}</TableCell> 
@@ -54,7 +65,11 @@ const Home:React.FC = ()  => {
                 </TableBody>)}
               </Table>
             </TableContainer>
-
+              <Pagination
+              postsPerPage={postPerPage}
+              totalPosts={news.length}
+              paginate={paginate}
+                />
       </Container>
     </Box>
   )
