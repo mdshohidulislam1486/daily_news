@@ -7,25 +7,29 @@ import './Home.css'
 import Pagination from './Pagination'
 
 
-interface NewsObject {
-  
-}
+
 
 const Home:React.FC = ()  => {
   const [news, setNews] = useState<any[]>([])
-  const [loding , setLoding] = useState(false)
+  const [loding , setLoding] = useState<Boolean>(false)
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [postPerPage, setPostPerPage] = useState<number>(10)
 
+console.log(news.length)
+
   useEffect(() => {
+
+
     const fetchPosts = async () =>{
       setLoding(true)
-      const res = await axios.get('https://hn.algolia.com/api/v1/search_by_date?query=20')
+      const res = await axios.get(`https://hn.algolia.com/api/v1/search_by_date?query=20`)
       setNews(res.data.hits)
+     
       setLoding(false)
     }
     fetchPosts()
   }, [])
+ 
 
   console.log(news)
 
@@ -76,3 +80,7 @@ const Home:React.FC = ()  => {
 }
 
 export default Home
+
+function myTimer(myTimer: any, arg1: number) {
+  throw new Error('Function not implemented.')
+}

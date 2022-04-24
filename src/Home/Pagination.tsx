@@ -8,9 +8,7 @@ interface Props{
 
 }
 
-interface newProps {
-count?: number | undefined
-}
+
 
 const Paginations:React.FC<Props> = ({postsPerPage, totalPosts, paginate}:Props) => {
 
@@ -23,10 +21,10 @@ const pageNumbers = [];
  
   return (
     <>
-    <ul style={{display:'flex', listStyle:"none"}} className='pagination'>
+    <ul style={{display:'flex', listStyle:"none"}} >
         {pageNumbers.map(number => (
-          <li style={{cursor:"pointer"}} key={number} className='page-item'>
-            <Button  onClick={() => paginate(number)}className='page-link'>
+          <li style={{cursor:"pointer"}} key={number} >
+            <Button  onClick={() => paginate(number)}>
               {number}
             </Button>
           </li>
