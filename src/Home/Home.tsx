@@ -22,9 +22,8 @@ console.log(news.length)
 
     const fetchPosts = async () =>{
       setLoding(true)
-      const res = await axios.get(`https://hn.algolia.com/api/v1/search_by_date?query=20`)
+      const res = await axios.get(`https://hn.algolia.com/api/v1/search_by_date?query=1`)
       setNews(res.data.hits)
-     
       setLoding(false)
     }
     fetchPosts()
