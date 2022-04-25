@@ -1,10 +1,11 @@
 import { TrySharp } from '@mui/icons-material'
 import { Box, Button, Card, CardActions, CardContent, Container, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { setInterval } from 'timers/promises'
 import './Home.css'
 import Pagination from './Pagination'
+import { fetchNesData } from './apiEndPoint'
 
 
 
@@ -29,8 +30,8 @@ console.log(news.length)
     fetchPosts()
   }, [])
  
-
-  console.log(news)
+  
+   
 
   // get current post
   const lastPost:any = currentPage * postPerPage
