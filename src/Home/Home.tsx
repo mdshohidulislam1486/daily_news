@@ -12,36 +12,44 @@ import { fetchNesData } from './apiEndPoint'
 
 const Home:React.FC = ()  => {
   const [news, setNews] = useState<any[]>([])
+  
   const [loding , setLoding] = useState<Boolean>(false)
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [postPerPage, setPostPerPage] = useState<number>(10)
 
-console.log(news.length)
 
+
+  const previous:number = 0
+  const myArray:any = [...news]
+  myArray.push(news)
+
+  const [newNews, seNewNews] = useState<any[]>()
   useEffect(() => {
-
-
+    const myData = previous +50 +50 +50 + 20 +20
     const fetchPosts = async () =>{
       setLoding(true)
-      const res = await axios.get(`https://hn.algolia.com/api/v1/search_by_date?query=1`)
+      const res = await axios.get(`https://hn.algolia.com/api/v1/search_by_date?query=${myData}`)
       setNews(res.data.hits)
+      seNewNews(myArray)
       setLoding(false)
     }
     fetchPosts()
   }, [])
  
-  
-   
+  console.log(news.length)
+  console.log(myArray)
+  console.log(news)
+  console.log(newNews)
 
   // get current post
-  const lastPost:any = currentPage * postPerPage
-  const firstPost:any = lastPost - postPerPage
+  const lastPost:number = currentPage * postPerPage
+  const firstPost:number = lastPost - postPerPage
   const currentPost:any = news.slice(firstPost, lastPost)
 
   const paginate = (pageNumber: React.SetStateAction<number>) => setCurrentPage(pageNumber);
 
   return (
-    <Box className='home_bg'>
+    <Box className='home_bg' component='div'>
       <Typography variant='h3' sx={{textAlign:'center', fontWeight:600, py:5}}>Latest News</Typography>
       <Container sx={{display:"flex", flexWrap:'wrap', justifyContent:"center"}}>
       <TableContainer>
@@ -56,7 +64,7 @@ console.log(news.length)
                   </TableRow>
                 </TableHead>
 
-               {currentPost?.map((n: { _id: React.Key | null | undefined; story_title: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; created_at: string | any[]; author: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; story_url: string | undefined }) =>  <TableBody key={n._id}>
+               {currentPost?.map((n: { objectID: React.Key | null | undefined; story_title: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; created_at: string | any[]; author: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; story_url: string | undefined }) =>  <TableBody key={n.objectID}>
                   <TableRow data-aos="zoom-in-down">
                       <TableCell>{n?.story_title}</TableCell> 
                       <TableCell>{n?.created_at.slice(0,10)}</TableCell> 
@@ -81,6 +89,3 @@ console.log(news.length)
 
 export default Home
 
-function myTimer(myTimer: any, arg1: number) {
-  throw new Error('Function not implemented.')
-}
