@@ -1,7 +1,10 @@
+/* eslint-disable testing-library/no-render-in-setup */
+/* eslint-disable testing-library/no-node-access */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Home from './Home';
 import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 test('renders learn react link', () => {
   render(<Home />);
@@ -10,6 +13,12 @@ test('renders learn react link', () => {
   expect(linkOrginated).toBeInTheDocument();
   expect(creadetAt).toBeInTheDocument(); 
 });
+
+test('get the table', ()=> {
+render(<Home/>)
+const myTable= screen.getAllByRole('table')
+expect(myTable.length).toEqual(1)
+})
 
 
 describe('Check if all the componets is avialable', () => {
@@ -24,10 +33,15 @@ describe('Check if all the componets is avialable', () => {
 
  afterEach(()=>{
    document.body.removeChild(homePage)
-   homePage.remove()
+   homePage.remove() 
  })
 
- 
-
+ it('Home page is rendered acoordingly', ()=>{
+   const tBody = homePage.querySelectorAll('h3')
+   
+   expect(tBody).toHaveLength(1)
+   expect(tBody[0].innerHTML).toBe('Latest News') 
+ })
 })
 
+  
