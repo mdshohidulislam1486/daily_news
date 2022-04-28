@@ -21,7 +21,7 @@ const pageNumbers = [];
  
   return (
     <>
-    <ul style={{display:'flex', listStyle:"none"}} >
+    <ul style={{display:'flex', listStyle:"none", flexWrap:'wrap'}} >
         {pageNumbers.map(number => (
           <li style={{cursor:"pointer"}} key={number} >
             <Button  onClick={() => paginate(number)}>

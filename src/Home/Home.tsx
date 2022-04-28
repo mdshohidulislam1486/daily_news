@@ -16,43 +16,40 @@ const Home:React.FC = ()  => {
   const [loding , setLoding] = useState<Boolean>(false)
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [postPerPage, setPostPerPage] = useState<number>(10)
-  const [newNews, seNewNews] = useState<any[]>()
+  const [newNews, seNewNews] = useState<any[]>([])
   const [addNum, setAddnum] = useState<number>(0)
-
-
-
-
-
-  
 
   useEffect(() => {
       
     let myData = addNum + 1
+    const myArray = [...news, news]
     
     const fetchPosts = async () =>{
       setLoding(true)
       const res = await axios.get(`https://hn.algolia.com/api/v1/search_by_date?tags=story&page=${addNum}`)
       setNews(res.data.hits)
+      setNews([...news, ...res.data.hits])
       setLoding(false)
     }
    const id =  setInterval(()=>{
       fetchPosts()
       setAddnum(myData)
+      
     }, 10000)
-    
     fetchPosts()
    return () => clearInterval(id)
   }, [addNum])
 
   console.log(addNum)
- 
+  
+  console.log(newNews)
   console.log(news)
   console.log(newNews)
 
   // get current post
   const lastPost:number = currentPage * postPerPage
   const firstPost:number = lastPost - postPerPage
-  const currentPost:any = news.slice(firstPost, lastPost)
+  const currentPost:any = news?.slice(firstPost, lastPost)
 
   const paginate = (pageNumber: React.SetStateAction<number>) => setCurrentPage(pageNumber);
 
