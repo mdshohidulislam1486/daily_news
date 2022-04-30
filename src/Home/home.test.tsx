@@ -1,13 +1,14 @@
-/* eslint-disable testing-library/no-render-in-setup */
-/* eslint-disable testing-library/no-node-access */
+/* eslint-disable testing-library/prefer-screen-queries */
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Home from './Home';
 import * as ReactDOM from 'react-dom';
-import { createRoot } from 'react-dom/client';
+import axios from 'axios';
+import '@testing-library/jest-dom/extend-expect';
+
 
 test('renders learn react link', () => {
-  render(<Home />);
+  render(<Home/>);
   const linkOrginated = screen.getByText(/Link Orginated/i);
   const creadetAt  = screen.getByText(/Created at/i);
   expect(linkOrginated).toBeInTheDocument();
@@ -16,11 +17,12 @@ test('renders learn react link', () => {
 
 test('get the table', ()=> {
 render(<Home/>)
-const myTable= screen.getAllByRole('table')
+const myTable= screen.getAllByRole('table') 
 expect(myTable.length).toEqual(1)
 })
 
 
+ 
 describe('Check if all the componets is avialable', () => {
  let homePage:HTMLDivElement;
 
@@ -29,19 +31,19 @@ describe('Check if all the componets is avialable', () => {
   document.body.appendChild(homePage)
   // eslint-disable-next-line testing-library/no-render-in-setup
   ReactDOM.render(<Home/>, homePage)
- })
-
+ }) 
+ 
  afterEach(()=>{
    document.body.removeChild(homePage)
    homePage.remove() 
  })
 
- it('Home page is rendered acoordingly', ()=>{
+ it('get a specific elements in your content with length', ()=>{
+   // eslint-disable-next-line testing-library/no-node-access
    const tBody = homePage.querySelectorAll('h3')
-   
    expect(tBody).toHaveLength(1)
-   expect(tBody[0].innerHTML).toBe('Latest News') 
  })
 })
 
-  
+
+
