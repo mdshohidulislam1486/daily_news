@@ -70,10 +70,10 @@ const Home:React.FC = ()  => {
                 {currentPost?.map((n: { objectID: React.Key | null | undefined; title: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; created_at: string | any[];created_at_i: string | any[]; author: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; url: string | undefined }) =>  <TableBody key={n.objectID}>
                 <a rel="noreferrer"  href={`https://hn.algolia.com/api/v1/search_by_date?numericFilters=created_at_i=${n.created_at_i}`}  target="_blank" style={{textDecoration:"none"}}>
                    <TableRow data-testid="test">  
-                       <TableCell data-testid='title'>{n?.title}</TableCell> 
-                       <TableCell>{n?.created_at.slice(0,10)}</TableCell> 
-                       <TableCell>{n?.author} </TableCell> 
-                       <TableCell sx={{cursor:'pointer', color:'#0000FF'}} ><a style={{textDecoration:'none'}} href={n?.url}><strong>{n.url}</strong></a></TableCell>
+                       <TableCell data-testid='title'> <span style={{fontWeight:700}}>Title:</span> {n?.title}</TableCell> 
+                       <TableCell> <span style={{fontWeight:700}}>Created at: </span>{n?.created_at.slice(0,10)}</TableCell> 
+                       <TableCell><span style={{fontWeight:700}}>Author:</span> {n?.author} </TableCell> 
+                       <TableCell sx={{cursor:'pointer'}} > <span style={{fontWeight:700}}>Url: </span> <a style={{textDecoration:'none'}} href={n?.url}> <strong>{n.url}</strong></a></TableCell>
                    </TableRow>
                    </a>
                  </TableBody>)}
