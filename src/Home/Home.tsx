@@ -1,7 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react/jsx-no-comment-textnodes */
 
 import {  Box, CircularProgress, Container, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import './Home.css'
 import Pagination from './Pagination'
@@ -14,7 +17,7 @@ const Home:React.FC = ()  => {
   
   const [loding , setLoding] = useState<Boolean>(false)
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const [postPerPage, setPostPerPage] = useState<number>(10)
+  const [postPerPage, setPostPerPage] = useState<number>(20)
   const [newNews, seNewNews] = useState<any[]>([])
   const [addNum, setAddnum] = useState<number>(0)
 
@@ -55,23 +58,24 @@ const Home:React.FC = ()  => {
        <Container sx={{display:"flex", flexWrap:'wrap', justifyContent:"center"}}>
        <TableContainer>
                <Table>
-                 <TableHead >
+                 {/* <TableHead >
                    <TableRow data-aos="zoom-in-down">
                    <TableCell><strong>Title</strong></TableCell>
                    <TableCell><strong>Created at</strong></TableCell>
                    <TableCell><strong>author</strong></TableCell>
                    <TableCell><strong>Link Orginated</strong></TableCell>
-                   
                    </TableRow>
-                 </TableHead>
+                 </TableHead> */}
  
-                {currentPost?.map((n: { objectID: React.Key | null | undefined; title: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; created_at: string | any[]; author: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; story_url: string | undefined }) =>  <TableBody key={n.objectID}>
-                   <TableRow data-testid="test">
+                {currentPost?.map((n: { objectID: React.Key | null | undefined; title: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; created_at: string | any[];created_at_i: string | any[]; author: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; url: string | undefined }) =>  <TableBody key={n.objectID}>
+                <a rel="noreferrer"  href={`https://hn.algolia.com/api/v1/search_by_date?numericFilters=created_at_i=${n.created_at_i}`}  target="_blank" style={{textDecoration:"none"}}>
+                   <TableRow data-testid="test">  
                        <TableCell data-testid='title'>{n?.title}</TableCell> 
                        <TableCell>{n?.created_at.slice(0,10)}</TableCell> 
                        <TableCell>{n?.author} </TableCell> 
-                       <TableCell sx={{cursor:'pointer', color:'#0000FF'}} ><a style={{textDecoration:'none'}} href={n?.story_url}><strong>Find Story Link</strong></a></TableCell>
+                       <TableCell sx={{cursor:'pointer', color:'#0000FF'}} ><a style={{textDecoration:'none'}} href={n?.url}><strong>{n.url}</strong></a></TableCell>
                    </TableRow>
+                   </a>
                  </TableBody>)}
                </Table>
              </TableContainer>
