@@ -4,7 +4,10 @@
 import {  Box, CircularProgress, Container, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import  {MyNewsContext}  from '../context/Context'
+import JsonFile2 from '../JsonFile2'
 
 import './Home.css'
 import Pagination from './Pagination'
@@ -13,15 +16,15 @@ import Pagination from './Pagination'
 
 
 const Home:React.FC = ()  => {
-  const [news, setNews] = useState<any[]>([])
+  /* const [news, setNews] = useState<any[]>([])
   
-  const [loding , setLoding] = useState<Boolean>(false)
+  const [loding , setLoding] = useState<Boolean>(false) */
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [postPerPage, setPostPerPage] = useState<number>(20)
   const [newNews, seNewNews] = useState<any[]>([])
-  const [addNum, setAddnum] = useState<number>(0)
+/*   const [addNum, setAddnum] = useState<number>(0) */
 
-  useEffect(() => {
+/*   useEffect(() => {
   let myData = addNum + 1
    const fetchPosts = async () =>{
       const res = await axios.get(`https://hn.algolia.com/api/v1/search_by_date?tags=story&page=${addNum}`)
@@ -35,14 +38,17 @@ const Home:React.FC = ()  => {
     fetchPosts()
    return () => clearInterval(id)
   }, [addNum])
-  
+   */
 
-  console.log(addNum)
+/*   console.log(addNum)
   console.log(newNews)
   console.log(news)
   console.log(newNews)
+ */
 
 
+  const news = useContext(MyNewsContext)
+  console.log(news)
   // get current post
   const lastPost:number = currentPage * postPerPage
   const firstPost:number = lastPost - postPerPage
@@ -76,6 +82,7 @@ const Home:React.FC = ()  => {
                        <TableCell sx={{cursor:'pointer'}} > <span style={{fontWeight:700}}>Url: </span> <a style={{textDecoration:'none'}} href={n?.url}> <strong>{n.url}</strong></a></TableCell>
                    </TableRow>
                    </Link>
+                   {/* <JsonFile2 singleNews={n} key={n.objectID}></JsonFile2> */}
                  </TableBody>)}
                </Table>
              </TableContainer>
