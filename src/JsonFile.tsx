@@ -11,17 +11,6 @@ const [rawJson, setRawJson] = useState<any[]>([])
 
 
  const {createdAt} = useParams()
-/*
-useEffect(()=>{
-    
-    fetch(`https://hn.algolia.com/api/v1/search_by_date?numericFilters=created_at_i=${createdAt}`)
-    .then(res => res.json())
-    .then(data => {
-    setRawJson(data)
-    })
-    
-
-}, []) */
 
 const  myallNews = useContext(MyNewsContext)
 

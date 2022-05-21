@@ -18,10 +18,14 @@ const Context = ({children}:Props) => {
   const [addNum, setAddnum] = useState<number>(0)
 
   useEffect(() => {
+    let isCancelled:Boolean = false;
     let myData = addNum + 1
      const fetchPosts = async () =>{
         const res = await axios.get(`https://hn.algolia.com/api/v1/search_by_date?tags=story&page=${addNum}`)
-        setNews([...news, ...res.data.hits])
+        if(!isCancelled){
+          setNews([...news, ...res.data.hits])
+        }
+        
       }
      const id =  setInterval(()=>{
         fetchPosts()
@@ -29,7 +33,12 @@ const Context = ({children}:Props) => {
         
       }, 10000)
       fetchPosts()
-     return () => clearInterval(id)
+      
+     return () =>{
+      isCancelled = true
+      clearInterval(id)
+     }
+     
     }, [addNum])
 
     console.log(news)
