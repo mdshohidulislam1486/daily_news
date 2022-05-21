@@ -1,12 +1,11 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable react/jsx-no-comment-textnodes */
+
 
 import {  Box, CircularProgress, Container, Grid, Link, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-/* import { Link } from 'react-router-dom' */
+
 import  {MyNewsContext}  from '../context/Context'
 
 
