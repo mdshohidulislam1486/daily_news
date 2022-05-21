@@ -14,7 +14,6 @@ const [rawJson, setRawJson] = useState<any[]>([])
 
 const  myallNews = useContext(MyNewsContext)
 
-console.log(myallNews, 'yap it is my all news')
 
 useEffect(()=>{
 const mySingleNewsJson = myallNews.find(c => c?.created_at_i.toString() === createdAt?.toString())

@@ -1,8 +1,8 @@
 
 
-import {  Box, CircularProgress, Container, Grid, Link, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
-import axios from 'axios'
-import React, { useEffect, useRef, useState } from 'react'
+import {  Box, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
+
+import React, {  useState } from 'react'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -23,7 +23,6 @@ const Home:React.FC = ()  => {
 
   let navigate = useNavigate()
   const news = useContext(MyNewsContext)
-  console.log(news)
   // get current post
   const lastPost:number = currentPage * postPerPage
   const firstPost:number = lastPost - postPerPage
