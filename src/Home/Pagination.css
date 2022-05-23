@@ -9,7 +9,7 @@
 .paginationBttns a{
     padding: 10px;
     margin: 8px;
-    border-radius: 5px;
+    border-radius:50%;
     border: 1px solid #2523ff;
     color: #2b23ff;
     cursor: pointer;

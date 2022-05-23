@@ -32,7 +32,7 @@ const pageNumbers = [];
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
    paginate(selected + 1)
  }
- 
+
   return (
     <>
     {/* <div>
@@ -66,10 +66,10 @@ const pageNumbers = [];
         )}
       />
     </div> */}
-      <div>
+      <div style={{marginTop:10}}>
         <ReactPaginate
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
+        previousLabel={"<"}
+        nextLabel={">"}
         pageCount={totalPosts / 20}
         onPageChange={changePage}
         containerClassName={"paginationBttns"}
