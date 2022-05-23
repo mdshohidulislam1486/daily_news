@@ -17,12 +17,11 @@ const  myallNews = useContext(MyNewsContext)
 
 useEffect(()=>{
 const mySingleNewsJson = myallNews.find(c => c?.created_at_i.toString() === createdAt?.toString())
-console.log(mySingleNewsJson, 'And a string')
 setRawJson(mySingleNewsJson)
 }, [])
 
   return (
-    <Box sx={{maxWidth:"100%"}}>
+    <Box >
         {JSON.stringify(rawJson)}
     </Box>
   )

@@ -28,7 +28,10 @@ const Home:React.FC = ()  => {
   const firstPost:number = lastPost - postPerPage
   const currentPost:any = news?.slice(firstPost, lastPost)
 
-  const paginate = (pageNumber: React.SetStateAction<number>) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: React.SetStateAction<number>) =>{
+    setCurrentPage(pageNumber)
+    console.log(pageNumber)
+  };
 
   return (
     <Box className='home_bg'>
@@ -63,6 +66,7 @@ const Home:React.FC = ()  => {
                totalPosts={news?.length}
                paginate={paginate}
                  />
+                 
        </Container>
      
     </Box>
