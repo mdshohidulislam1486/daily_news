@@ -45,7 +45,7 @@ const Home:React.FC = ()  => {
                       <TableCell><strong>Title</strong></TableCell>
                       <TableCell><strong>Created at</strong></TableCell>
                       <TableCell><strong>Author</strong></TableCell>
-                      <TableCell><strong>Link Orginated</strong></TableCell>
+                      <TableCell><strong>URL</strong></TableCell>
                    </TableRow>
                  </TableHead>
  
