@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { useParams } from 'react-router-dom'
@@ -22,9 +22,9 @@ setRawJson(mySingleNewsJson)
 }, [])
 
   return (
-    <div>
+    <Box sx={{maxWidth:"100%"}}>
         {JSON.stringify(rawJson)}
-    </div>
+    </Box>
   )
 }
 

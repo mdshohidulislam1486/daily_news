@@ -4,8 +4,7 @@ import React from 'react'
 import { useState } from 'react'
 import { createContext } from 'react'
 import { useEffect } from 'react'
-import { useContext } from 'react'
-import Home from '../Home/Home'
+
 
 export const MyNewsContext = createContext<any[]>([])
 
@@ -26,9 +25,7 @@ const Context = ({children}:Props) => {
           setNews([...news, ...res.data.hits])
         }
       }
-     
       fetchPosts()
-
       const id =  setInterval(()=>{ 
         setAddnum(newNum)
       }, 10000)
@@ -37,10 +34,10 @@ const Context = ({children}:Props) => {
       clearInterval(id)
       isCancelled = true;
      }
-     
+
     }, [addNum])
 
- console.log(news, 'lets see how many times we get this data')
+   console.log(news, 'lets see how many times we get this data')
 
   return (
     <>
