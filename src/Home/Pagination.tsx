@@ -26,7 +26,6 @@ const pageNumbers = [];
   }
 
   const myNum = pageNumbers.length
-  console.log(myNum)
 
  const changePage = ({selected}:any) =>{
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
@@ -45,7 +44,7 @@ const pageNumbers = [];
             </li>
           ))}
       </ul>
-    </div>
+    </div> */}
     <div style={{marginTop:10}}>
         <Stack spacing={5}>
         <Pagination 
@@ -53,8 +52,8 @@ const pageNumbers = [];
         count={myNum} variant="outlined" color="secondary"
 
          />
-            </Stack>
-         <Pagination
+        </Stack>
+         {/* <Pagination
           count={pageNumbers.length} 
           onChange={(e)=> paginate((e.target as HTMLElement).textContent)}  
           renderItem={(item) => (
@@ -64,9 +63,9 @@ const pageNumbers = [];
             {...item}
           />
         )}
-      />
-    </div> */}
-      <div style={{marginTop:10}}>
+      /> */}
+    </div>
+      {/* <div style={{marginTop:10}}>
         <ReactPaginate
         previousLabel={"<"}
         nextLabel={">"}
@@ -78,7 +77,7 @@ const pageNumbers = [];
         disabledClassName={'paginationDisabled'}
         activeClassName={"paginationActive"}
         />
-      </div>
+      </div> */}
     </>
   )
 }

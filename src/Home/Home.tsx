@@ -1,6 +1,7 @@
 
 
-import {  Box, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
+import {  Box, Container, styled, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
+import usePagination from '@mui/material/usePagination/usePagination'
 
 import React, {  useState } from 'react'
 import { useContext } from 'react'
@@ -13,6 +14,12 @@ import './Home.css'
 import Pagination from './Pagination'
 
 
+const List = styled('ul')({
+  listStyle: 'none',
+  padding: 0,
+  margin: 0,
+  display: 'flex',
+});
 
 
 const Home:React.FC = ()  => {
@@ -30,8 +37,12 @@ const Home:React.FC = ()  => {
 
   const paginate = (pageNumber: React.SetStateAction<number>) =>{
     setCurrentPage(pageNumber)
-    console.log(pageNumber)
   };
+  
+  const { items } = usePagination({
+    count:news.length / 20,
+  });
+
 
   return (
     <Box className='home_bg'>
@@ -61,11 +72,48 @@ const Home:React.FC = ()  => {
                  </TableBody>)}
                </Table>
              </TableContainer>
-               <Pagination
-               postsPerPage={postPerPage}
-               totalPosts={news?.length}
-               paginate={paginate}
-                 />
+               <Box sx={{my:5}}>
+                <Pagination
+                postsPerPage={postPerPage}
+                totalPosts={news?.length}
+                paginate={paginate}
+                  />
+               </Box>
+               <nav>
+                  <List >
+                    {items.map(({ page, type, selected, ...item }: any, index: React.Key | null | undefined) => {
+                      let children = null;
+                 
+                      if (type === 'start-ellipsis' || type === 'end-ellipsis') {
+                       
+                        children = '…';
+                      } else if (type === 'page') {
+                        children = (
+                          <button
+                            type="button"
+                            style={{
+                              fontWeight: selected ? 'bold' : undefined,
+                            }}
+                            {...item}
+                          >
+                            {page}
+                            
+                          </button>
+                        );
+                      } else {
+                        children = (
+                          <button type="button" {...item}>
+                            {type}
+                          </button>
+                        );
+                      }
+
+                      return <li
+                        onClick={()=> paginate(page)}
+                        key={index}>{children}</li>;
+                    })}
+                  </List>
+              </nav>
                  
        </Container>
      
