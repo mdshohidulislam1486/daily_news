@@ -1,8 +1,8 @@
-import { Box, Typography } from '@mui/material'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Box } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import { json } from 'stream/consumers'
 import { MyNewsContext } from './context/Context'
 
 

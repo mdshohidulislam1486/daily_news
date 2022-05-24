@@ -1,9 +1,8 @@
 /* eslint-disable testing-library/prefer-screen-queries */
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Home from './Home';
 import * as ReactDOM from 'react-dom';
-import axios from 'axios';
 import '@testing-library/jest-dom/extend-expect';
 
 

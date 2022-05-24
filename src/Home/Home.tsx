@@ -8,10 +8,7 @@ import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import  {MyNewsContext}  from '../context/Context'
-
-
 import './Home.css'
-import Pagination from './Pagination'
 
 
 const List = styled('ul')({
@@ -25,11 +22,12 @@ const List = styled('ul')({
 const Home:React.FC = ()  => {
 
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const [postPerPage, setPostPerPage] = useState<number>(20)
+  const [postPerPage] = useState<number>(20)
 
 
   let navigate = useNavigate()
   const news = useContext(MyNewsContext)
+
   // get current post
   const lastPost:number = currentPage * postPerPage
   const firstPost:number = lastPost - postPerPage
@@ -40,7 +38,7 @@ const Home:React.FC = ()  => {
   };
   
   const { items } = usePagination({
-    count:news.length / 20,
+    count:news.length / postPerPage,
   });
 
 
@@ -73,12 +71,6 @@ const Home:React.FC = ()  => {
                </Table>
              </TableContainer>
                <Box sx={{my:5}}>
-                <Pagination
-                postsPerPage={postPerPage}
-                totalPosts={news?.length}
-                paginate={paginate}
-                  />
-               </Box>
                <nav>
                   <List >
                     {items.map(({ page, type, selected, ...item }: any, index: React.Key | null | undefined) => {
@@ -114,6 +106,8 @@ const Home:React.FC = ()  => {
                     })}
                   </List>
               </nav>
+               </Box>
+               
                  
        </Container>
      
