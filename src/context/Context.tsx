@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import axios from 'axios'
+
 import React from 'react'
 import { useState } from 'react'
 import { createContext } from 'react'
 import { useEffect } from 'react'
+import axios from 'axios'
 
 
 
@@ -14,7 +15,7 @@ interface Props{
   children:JSX.Element
 }
 
-const Context = ({children}:Props) => {
+export const Context = ({children}:Props) => {
   const [news, setNews] = useState<any[]>([])
   const [addNum, setAddnum] = useState<number>(0)
 
@@ -22,7 +23,7 @@ const Context = ({children}:Props) => {
 
   useEffect(() => {
     let newNum = addNum + 1
-     const fetchPosts = async () =>{
+    const fetchPosts = async () =>{
         const res = await axios.get(`https://hn.algolia.com/api/v1/search_by_date?tags=story&page=${addNum}`)
         setNews([...news, ...res.data.hits])
         }
@@ -34,7 +35,6 @@ const Context = ({children}:Props) => {
       return () =>{
         clearInterval(id)
        }
-    
     }, [addNum])
 
   return (

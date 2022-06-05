@@ -2,7 +2,7 @@
 
 import {  Box, Container, styled, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import usePagination from '@mui/material/usePagination/usePagination'
-
+ 
 import React, {  useState } from 'react'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -101,6 +101,7 @@ const Home:React.FC = ()  => {
                       }
 
                       return <li
+                        data-testid='each-page'
                         onClick={()=> paginate(page)}
                         key={index}>{children}</li>;
                     })}
