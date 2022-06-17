@@ -5,10 +5,13 @@ import axios from 'axios';
 import {Context, MyNewsContext} from './Context';
 import { act } from 'react-dom/test-utils';
 
-import { configure, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { configure, EnzymeAdapter, mount } from 'enzyme';
+import { jsx } from '@emotion/react';
+import { JsxEmit } from 'typescript';
+import App from '../App';
 
-configure({ adapter: new Adapter() });
+
+configure({ adapter: new EnzymeAdapter() });
 
 
 // var ShallowRenderer = require('react-test-renderer/shallow');
@@ -18,27 +21,27 @@ configure({ adapter: new Adapter() });
 
 
 describe("news lenght will be 20", ()=>{
-    it("sets is get the news lenght", ()=>{
-        const TestComponets =() =>{
-            const {news}:any = React.useContext(MyNewsContext)
-            
-            return <>
-            <div>
-               {news.lenght}
-            </div>
-            </> 
-        }
-    const wrapper = mount(<Context><TestComponets/></Context>)
-    })
-})
+    interface children{
+        children:JSX.Element
+      }
 
-/* test('Get the list of news with axios get request', async() =>{
-
+    it('should scroll into AnotherComponent when date is updated', () => {
+        const mScrollIntoView = jest.fn();
+        window.HTMLElement.prototype.scrollIntoView = mScrollIntoView;
     
-    useContextMock.mockReturnValue("Test Value");
-    const  element = await new ShallowRenderer().render(
-        <Context children={<div></div>} />
-    );
+        const { rerender } = render(
+          <MyNewsContext.Provider value={[]}>
+            <Context children={<App/>} />
+          </MyNewsContext.Provider>
+        );
+        expect(mScrollIntoView).not.toBeCalled();
+    
+        rerender(
+          <MyNewsContext.Provider value={[]}>
+            <Context children={<App/>}  />
+          </MyNewsContext.Provider>
+        );
+        expect(mScrollIntoView).toBeCalled();
+      });
 
-   
-  })  */
+})

@@ -16,5 +16,14 @@ test('Chaeck the button is disabled and enabled properly', async() =>{
   const listItems = screen.getAllByTestId('each-page')
   const previousButton =  screen.getByText(/previous/i)
   expect(previousButton).toBeDisabled()
-  expect(listItems).toHaveLength(2) 
+  expect(listItems).toHaveLength(2)  
+
+})  
+test('Chaeck the next button is disabled and enabled properly', async() =>{
+  render(<Router><Home/></Router>)
+  const listItems = screen.getAllByTestId('each-page')
+  const previousButton =  screen.getByText(/next/i)
+  expect(previousButton).toBeDisabled()
+  expect(listItems).toHaveLength(2)  
+
 })  
